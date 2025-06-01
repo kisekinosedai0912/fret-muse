@@ -1,6 +1,7 @@
-# React + Vite
+# React + Vite Personal Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an idea that came to my mind since I can't find free apps that has the features that I need to master my guitar.
+I decided to create this project with an idea in mind to create my own website that will assist me in mastering my guitar skills.
 
 Currently, two official plugins are available:
 
