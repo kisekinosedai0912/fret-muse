@@ -1,0 +1,26 @@
+#box-1{
+    /* background-color: rgba(169, 191, 159, 0.6);  */
+    backdrop-filter: blur(2px);
+}
+
+#box-2{
+    /* background-color: rgba(115, 108, 18, 0.6);  */
+    background-color: rgba(169, 191, 159);
+    backdrop-filter: blur(2px);
+}
+
+#box-3{
+    /* background-color: rgba(191, 191, 191, 0.6);  */
+    backdrop-filter: blur(2px);
+}
+
+#box-2, p {
+    font-size: x-large;
+}
+
+#guitarName {
+    font-size: x-large;
+    padding: 0 10px;
+    background-color: rgba(115, 108, 18);
+    border-radius: 10px;
+}
