@@ -5,8 +5,8 @@ import '../assets/css/nav.css';
 
 export default function Nav() {
     return (
-        <header className="w-full">
-            <nav className="w-full flex items-center justify-between bg-gray-800 text-white px-[20px] py-[10px] bg-[#A9BF9F]">
+        <header className="w-full fixed top-0 left-0 right-0 z-50 bg-[#F5F5F5]">
+            <nav className="w-full flex items-center justify-between px-[20px] py-[10px] bg-[#A9BF9F]">
                 {/* Left section: Hamburger + Site Name */}
                 <div className="flex items-center space-x-3 justify-between w-[230px]">
                     <button type="button">

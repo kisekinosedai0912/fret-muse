@@ -9,7 +9,7 @@ export default function RightContainer() {
     return (
         <>
             {/* Right container - image container */}
-            <section className="flex-1 flex-col z-[4] relative">
+             <section className="flex-1 flex-col z-[4] relative mt-[40px]">
                 <div className="h-full max-h-[calc(100vh-82px)] flex items-start justify-center">
                     <div className="transform rotate-[54deg] mt-[-10%] transition-transform duration-300 flex flex-col items-center">
                         <img 
