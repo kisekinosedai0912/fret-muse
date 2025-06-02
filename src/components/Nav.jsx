@@ -18,7 +18,7 @@ export default function Nav() {
                 {/* Center section: Nav Links */}
                 <ul className="flex-1 flex items-center justify-center gap-[20px] list-none">
                     <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Home</a></li>
-                    <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Fret Master</a></li>
+                    <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Fret Mastery</a></li>
                     <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Scales</a></li>
                 </ul>
 
