@@ -21,13 +21,13 @@ export default function FretPage() {
                     {/* Speech input container */}
                     <div id="speech-input-container" className="w-[80%] h-[80px] border border-[#262626] rounded-lg flex items-center justify-center bg-white">
                         {/* Sound wave */}
-                        <div className="absolute top-[30%] left-1/2 transform -translate-x-1/2 w-[60%] h-[2px] overflow-hidden">
+                        {/* <div className="absolute top-[30%] left-1/2 transform -translate-x-1/2 w-[60%] h-[2px] overflow-hidden">
                             {isPlaying && (
                                 <div className="wave-container">
                                     <div className="sound-wave"></div>
                                 </div>
                             )}
-                        </div>
+                        </div> */}
                         
                         {/* Play line */}
                         <div id="line" className="w-[40%] border border-[#736C12] mr-[20px]"></div>

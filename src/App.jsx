@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Nav from './components/Nav.jsx'
 import Main from './MainBody.jsx'
 

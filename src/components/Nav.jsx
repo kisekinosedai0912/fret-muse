@@ -19,7 +19,7 @@ export default function Nav() {
                 <ul className="flex-1 flex items-center justify-center gap-[20px] list-none">
                     <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Home</a></li>
                     <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Fret Mastery</a></li>
-                    <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Scales</a></li>
+                    <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Learn Scales</a></li>
                 </ul>
 
                 {/* Right section: Empty or optional future content */}

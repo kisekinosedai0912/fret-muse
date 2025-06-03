@@ -1,6 +1,8 @@
 import HomeLeftComponent from './components/LeftContainer';
 import HomeRightComponent from './components/RightContainer';
 import FretPage from './components/FretPage';
+import Scroller from './components/Scroll';
+// import ScalesPage from './components/Scales';
 
 export default function Main() {
     return (
@@ -14,6 +16,11 @@ export default function Main() {
             {/* Fret master page */}
             <section className="flex gap-4 p-4 h-screen snap-start" id="fret-wrapper">
                 <FretPage />
+            </section>
+
+            {/* Scales Page */}
+            <section className="flex gap-4 p-4 h-screen snap-start" id="scale-wrapper">
+                {/* <ScalesPage /> */}
             </section>
         </main>
     );
