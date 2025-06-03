@@ -1,5 +1,3 @@
-import Scroller from './Scroll';
-
 export default function LeftContainer() {
     return (
         <>  
@@ -13,8 +11,6 @@ export default function LeftContainer() {
                     </div>
                 </div>
                 <div id="box-3" className="absolute h-1/3 min-h-[200px] ml-[30%] w-[40%] mt-[45%] border border-[#262626] rounded-lg z-[3]"></div>
-
-                <Scroller />
             </section>
         </>
     );
