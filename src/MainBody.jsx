@@ -19,11 +19,9 @@ export default function Main() {
             </section>
 
             {/* Scales Page */}
-            <section className="flex gap-4 p-4 h-screen snap-start" id="scale-wrapper">
-                {/* <ScalesPage /> */}
+            <section className="flex gap-4 p-4 h-screen bg-[#F5F5F5] snap-start" id="scale-wrapper">
                 <ScalesPage />
             </section>
-
             <Scroller />
         </main>
     );
