@@ -36,19 +36,19 @@ export default function ScalesPage() {
                         src={MajorPos1} 
                         alt="1st position" 
                         loading="lazy"
-                        className="w-[500px] h-[220px] object-fit border border-[#262626] rounded-lg" 
+                        className="w-[450px] h-[220px] object-fit border border-[#262626] rounded-lg" 
                     />
                     <img 
                         src={MajorPos2}
                         alt="2nd position" 
                         loading="lazy"
-                        className="w-[500px] h-[220px] object-fit border border-[#262626] rounded-lg" 
+                        className="w-[450px] h-[220px] object-fit border border-[#262626] rounded-lg" 
                     />
                     <img 
                         src={MajorPos3}
                         alt="3rd position" 
                         loading="lazy"
-                        className="w-[500px] h-[220px] object-fit border border-[#262626] rounded-lg" 
+                        className="w-[450px] h-[220px] object-fit border border-[#262626] rounded-lg" 
                     />
                 </div>
                 
@@ -58,13 +58,13 @@ export default function ScalesPage() {
                         src={MajorPos4}
                         alt="4th position" 
                         loading="lazy"
-                        className="w-[500px] h-[220px] object-fit border border-[#262626] rounded-lg" 
+                        className="w-[450px] h-[220px] object-fit border border-[#262626] rounded-lg" 
                     />
                     <img 
                         src={MajorPos5}
                         alt="5th position" 
                         loading="lazy"
-                        className="w-[500px] h-[220px] object-fit border border-[#262626] rounded-lg" 
+                        className="w-[450px] h-[220px] object-fit border border-[#262626] rounded-lg" 
                     />
                 </div>
             </div>

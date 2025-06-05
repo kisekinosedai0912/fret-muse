@@ -3,6 +3,8 @@ import HomeRightComponent from './components/RightContainer';
 import FretPage from './components/FretPage';
 import Scroller from './components/Scroll';
 import ScalesPage from './components/Scales';
+import Footer from './components/Footer';
+import './assets/css/index.css';
 
 export default function Main() {
     return (
@@ -22,6 +24,8 @@ export default function Main() {
             <section className="flex gap-4 p-4 h-screen bg-[#F5F5F5] snap-start" id="scale-wrapper">
                 <ScalesPage />
             </section>
+
+            <Footer />
             <Scroller />
         </main>
     );
