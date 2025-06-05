@@ -28,3 +28,8 @@
 #scroll-up, #scroll-down, #scroll {
     color: rgb(214, 210, 210);
 }
+
+footer p {
+    font-size: small;
+    color: #BFBFBF;
+}

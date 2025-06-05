@@ -34,7 +34,7 @@ export default function Scroll() {
     };
 
     return (
-        <div onClick={handleClick} className="fixed bottom-[4px] right-[40px] z-50 bg-[#736C12] cursor-pointer 
+        <div onClick={handleClick} className="fixed bottom-[4px] right-[24px] z-50 bg-[#736C12] cursor-pointer 
                                               p-2 hover:scale-110 transition-transform duration-200 flex 
                                               flex-col items-center justify-center gap-2 w-[3%] h-[7%]"
         >

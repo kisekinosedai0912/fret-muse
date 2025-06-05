@@ -11,7 +11,7 @@ export default function RightContainer() {
             {/* Right container - image container */}
              <section className="flex-1 flex-col z-[4] relative mt-[40px]">
                 <div className="h-full max-h-[calc(100vh-82px)] flex items-start justify-center">
-                    <div className="transform rotate-[54deg] mt-[-10%] transition-transform duration-300 flex flex-col items-center">
+                    <div className="transform rotate-[54deg] mt-[-17%] transition-transform duration-300 flex flex-col items-center">
                         <img 
                             src={jazzmaster} 
                             alt="jazz master guitar" 
@@ -21,7 +21,7 @@ export default function RightContainer() {
                     </div>
                     <span 
                         id="guitarName" 
-                        className="absolute right-[350px] top-[440px] font-outfit text-xl px-[10px] bg-[#736C12] text-white clip-path-polygon"
+                        className="absolute right-[320px] top-[410px] font-outfit text-xl px-[10px] bg-[#736C12] text-white clip-path-polygon"
                         style={{
                             clipPath: 'polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25%)'
                         }}
