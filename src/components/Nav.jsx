@@ -8,13 +8,14 @@ import { useState } from 'react';
 
 export default function Nav() {
     const [isOpen, setIsOpen] = useState(false);
+    const [activeLink, setActiveLink] = useState('home');
 
     return (
         <header className="w-full fixed top-0 left-0 right-0 z-50 bg-[#F5F5F5]">
             <nav className="w-full flex items-center justify-between px-[20px] py-[14px] bg-[#A9BF9F]">
-                {/* Left section: Hamburger + Site Name */}
+                {/* Left section: Hamburger + Site name */}
                 <div className="flex items-center space-x-3 justify-between w-[230px] ml-[20px]">
-                    {/* Hamburger Menu */}
+                    {/* Hamburger menu */}
                     <div 
                         onClick={() => setIsOpen(!isOpen)}
                         className="w-[18%] h-6 flex flex-col gap-[10px] justify-between cursor-pointer"
@@ -33,20 +34,20 @@ export default function Nav() {
                         />
                     </div>
 
-                    {/* Dropdown Menu */}
-                    <div className={`absolute top-full left-0 w-48 overflow-hidden transition-all duration-300 ease-out
+                    {/* Dropdown menu */}
+                    <div className={`absolute top-full left-0 w-52 overflow-hidden transition-all duration-300 ease-out
                         ${isOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                        <div className={`glassmorphism rounded-b-md p-[10px] shadow-lg transform transition-transform duration-300
+                        <div className={`glassmorphism rounded-b-md p-[16px] shadow-lg transform transition-transform duration-300
                             ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-                            <a href="#" className="no-underline block px-4 py-3 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center gap-3">
+                            <a href="#" className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center">
                                 <HomeIcon className="text-[#262626] text-xl mr-[4px]" />
                                 Home
                             </a>
-                            <a href="#" className="no-underline block px-4 py-3 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center gap-3">
+                            <a href="#" className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center">
                                 <MusicNoteIcon className="text-[#262626] text-xl mr-[4px]" />
                                 Fret Mastery
                             </a>
-                            <a href="#" className="no-underline block px-4 py-3 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit flex items-center gap-3">
+                            <a href="#" className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit flex items-center">
                                 <SchoolIcon className="text-[#262626] text-xl mr-[4px]" />
                                 Learn Scales
                             </a>
@@ -58,12 +59,36 @@ export default function Nav() {
 
                 {/* Center section: Nav Links */}
                 <ul className="flex-1 flex items-center justify-center gap-[20px] list-none mb-[10px]">
-                    <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Home</a></li>
-                    <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Fret Mastery</a></li>
-                    <li><a href="#" className="no-underline hover:text-red text-[#262626] font-outfit">Learn Scales</a></li>
+                    <li>
+                        <a 
+                            href="#" 
+                            className={`nav-link font-outfit ${activeLink === 'home' ? 'active' : ''}`}
+                            onClick={() => setActiveLink('home')}
+                        >
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#" 
+                            className={`nav-link font-outfit ${activeLink === 'fret' ? 'active' : ''}`}
+                            onClick={() => setActiveLink('fret')}
+                        >
+                            Fret Mastery
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#" 
+                            className={`nav-link font-outfit ${activeLink === 'scales' ? 'active' : ''}`}
+                            onClick={() => setActiveLink('scales')}
+                        >
+                            Learn Scales
+                        </a>
+                    </li>
                 </ul>
 
-                {/* Right section: Empty or optional future content */}
+                {/* Right section: Optional socmed accounts */}
                 <div className="w-[340px] flex space-x-4 items-center justify-center overflow-x-hidden">
                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                         <FacebookIcon className="text-[#262626] hover:text-gray-600" />
