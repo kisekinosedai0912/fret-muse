@@ -1,11 +1,75 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import Faqs from './Faqs';
 import '../assets/css/fretpage.css';
 
 export default function FretPage() {
+    const fretboardNotes = [
+        // 1st String (High E)
+        { string: '1st String', notes: ['E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B', 'C', 'C#', 'Db', 'D', 'D#', 'Eb'] },
+        // 2nd String (B)
+        { string: '2nd String', notes: ['B', 'C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb'] },
+        // 3rd String (G)
+        { string: '3rd String', notes: ['G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B', 'C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb'] },
+        // 4th String (D)
+        { string: '4th String', notes: ['D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B', 'C', 'C#', 'Db',] },
+        // 5th String (A)
+        { string: '5th String', notes: ['A', 'A#', 'Bb', 'B', 'C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab',] },
+        // 6th String (Low E)
+        { string: '6th String', notes: ['E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B', 'C', 'C#', 'Db', 'D', 'D#', 'Eb',] }
+    ];
+
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentNote, setCurrentNote] = useState(getRandomNote());
+
+    // Randomizing notes
+    function getRandomNote() {
+        const randomString = fretboardNotes[Math.floor(Math.random() * fretboardNotes.length)];
+        const randomNote = randomString.notes[Math.floor(Math.random() * randomString.notes.length)];
+        return { string: randomString.string, note: randomNote };
+    };
+
+    // Speech synthesis API setup
+    const speak = (text) => {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance();
+ 
+            let formattedNote = text.note;
+
+            if (formattedNote.includes('#')) {
+                formattedNote = formattedNote.replace('#', ' sharp');
+            } else if (formattedNote.includes('b')) {
+                formattedNote = formattedNote.replace('b', ' flat');
+            }
+
+            utterance.text = `${text.string} ${formattedNote}`;
+            utterance.rate = 0.8; 
+            utterance.pitch = 1;
+            utterance.lang = 'en-US'; 
+            window.speechSynthesis.cancel(); 
+            window.speechSynthesis.speak(utterance);
+        }
+    };
+
+    useEffect(() => {
+        let intervalId;
+
+        if (isPlaying) {
+            speak(currentNote);
+            
+            intervalId = setInterval(() => {
+                const newNote = getRandomNote();
+                setCurrentNote(newNote);
+                speak(newNote);
+            }, 3000); 
+        }
+
+        return () => {
+            if (intervalId) clearInterval(intervalId);
+            window.speechSynthesis.cancel(); // Stop speaking when component unmounts or isPlaying changes
+        };
+    }, [isPlaying]);
     
     const handleClickEvent = () => {
         setIsPlaying(!isPlaying);
@@ -20,15 +84,6 @@ export default function FretPage() {
 
                     {/* Speech input container */}
                     <div id="speech-input-container" className="w-[80%] h-[80px] border border-[#262626] rounded-lg flex items-center justify-center bg-white">
-                        {/* Sound wave */}
-                        {/* <div className="absolute top-[30%] left-1/2 transform -translate-x-1/2 w-[60%] h-[2px] overflow-hidden">
-                            {isPlaying && (
-                                <div className="wave-container">
-                                    <div className="sound-wave"></div>
-                                </div>
-                            )}
-                        </div> */}
-                        
                         {/* Play line */}
                         <div id="line" className="w-[40%] border border-[#736C12] mr-[20px]"></div>
 
@@ -47,10 +102,10 @@ export default function FretPage() {
                 </div>
                 <div className="w-[35%] h-[60%] border border-[#A9BF9F] border-2 flex flex-col items-center justify-center" id="notes-container">
                     <div id="stringNum-container">
-                        <p className="text-[#262626] font-manrope">4th String</p>
+                        <p className="text-[#262626] font-manrope">{currentNote.string}</p>
                     </div>
                     <div id="note-container">
-                        <p className="text-[#262626] font-manrope">G#</p>
+                        <p className="text-[#262626] font-manrope">{currentNote.note}</p>
                     </div>
                 </div>
             </section>
