@@ -1,7 +1,7 @@
 import HomeLeftComponent from './components/LeftContainer';
 import HomeRightComponent from './components/RightContainer';
 import FretPage from './components/FretPage';
-import Scroller from './components/Scroll';
+import Scroller from './components/Scroller';
 import ScalesPage from './components/Scales';
 import Footer from './components/Footer';
 import './assets/css/index.css';

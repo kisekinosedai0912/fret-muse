@@ -12,3 +12,19 @@ header {
   display: inline-block;
   font-weight: bold;
 }
+
+.hamburger-menu {
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-menu span {
+    transform-origin: center;
+}
+
+.glassmorphism {
+  background: rgba(169, 191, 159, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(169, 191, 159, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}

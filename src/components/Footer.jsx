@@ -24,17 +24,17 @@ export default function Footer() {
             <div className="flex flex-col gap-[10px]">
                 <div className="flex items-center justify-start gap-[6px]">
                     <ContactPhone className="text-[#BFBFBF] text-xl" /> 
-                    <span className="text-[#BFBFBF]">09513546153</span>
+                    <span className="text-[#BFBFBF] font-manrope-light">09513546153</span>
                 </div>
                 <div className="flex items-center justify-start gap-[6px]">
                     <Email className="text-[#BFBFBF] text-xl" /> 
-                    <span className="text-[#BFBFBF]">
+                    <span className="text-[#BFBFBF] font-manrope-light">
                         kisekinosedai0912@gmail.com
                     </span>
                 </div>
                 <div className="flex items-center justify-start gap-[6px]">
                     <LocationCity className="text-[#BFBFBF] text-xl" /> 
-                    <span className="text-[#BFBFBF]">
+                    <span className="text-[#BFBFBF] font-manrope-light">
                         Purok Masagana, Pob. II,<br />
                         Sagay City, Negros Occidental
                     </span>
