@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import MajorPos1 from "../assets/img/pos-1.png";
 import MajorPos2 from "../assets/img/pos-2.png";
 import MajorPos3 from "../assets/img/pos-3.png";
@@ -31,6 +31,7 @@ import DiminishedPos1 from '../assets/img/d-pos1.png';
 import DiminishedPos2 from '../assets/img/d-pos2.png';
 import DiminishedPos3 from '../assets/img/d-pos3.png';
 import DiminishedPos4 from '../assets/img/d-pos4.png';
+import '../assets/css/scale.css';
 
 // Scake props arrays
 const majorScale = [
@@ -118,27 +119,55 @@ const scalesData = {
 
 export default function ScalesPage() {
     const [selectedScale, setSelectedScale] = useState('major-scale');
+    const [isVisible, setIsVisible] = useState(false);
+    const componentRef = useRef(null);
 
     // Split images into two rows this is done to ensure that the images are displayed in two rows
     const currentScaleImages = scalesData[selectedScale].images;
     const firstRow = currentScaleImages.slice(0, Math.ceil(currentScaleImages.length / 2));
     const secondRow = currentScaleImages.slice(Math.ceil(currentScaleImages.length / 2));
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.2 }
+        );
+
+        if (componentRef.current) {
+            observer.observe(componentRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     const renderScaleImages = (images) => {
         return images.map((item, index) => (
-            <ScaleImage 
+            <div 
                 key={index}
-                img={item.img}
-                alt={item.alt}
-                position={item.position}
-            />
+                className={`opacity-0 ${isVisible ? 'deal-card' : ''}`}
+                style={{ animationDelay: `${0.2 * (index + 1)}s` }}
+            >
+                <ScaleImage 
+                    img={item.img}
+                    alt={item.alt}
+                    position={item.position}
+                />
+            </div>
         ));
     };
 
     return (
-        <section id='parent-container' className="flex flex-col items-center justify-start mt-[100px] min-h-screen w-full snap-start">
+        <section ref={componentRef} id='parent-container' className="flex flex-col items-center justify-start mt-[100px] min-h-screen w-full snap-start">
             {/* Dropdown container */}
-            <div id="filter-container" className="flex items-center justify-start gap-[100px] w-[92%] h-[60px]">
+            <div id="filter-container" 
+                className={`flex items-center justify-start gap-[100px] w-[92%] h-[60px] opacity-0 
+                    ${isVisible ? 'slide-filter' : ''}`}
+            >
                 <select 
                     className="py-[6px] w-[160px] font-outfit-small bg-[#736C12]"
                     value={selectedScale}
