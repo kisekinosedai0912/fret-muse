@@ -53,3 +53,36 @@ header {
 .nav-link.active::after {
   width: 50%;
 }
+
+/* Nav component aniamtion styles */
+.nav-appear {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+.social-icon {
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

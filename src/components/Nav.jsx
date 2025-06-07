@@ -4,14 +4,20 @@ import HomeIcon from '@mui/icons-material/Home';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SchoolIcon from '@mui/icons-material/School';
 import '../assets/css/nav.css'; 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Nav() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeLink, setActiveLink] = useState('home');
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        setIsVisible(true);
+    }, []);
 
     return (
-        <header className="w-full fixed top-0 left-0 right-0 z-50 bg-[#F5F5F5]">
+        <header className={`w-full fixed top-0 left-0 right-0 z-50 bg-[#F5F5F5] opacity-0 
+            ${isVisible ? 'nav-appear' : ''}`}>
             <nav className="w-full flex items-center justify-between px-[20px] py-[14px] bg-[#A9BF9F]">
                 {/* Left section: Hamburger + Site name */}
                 <div className="flex items-center space-x-3 justify-between w-[230px] ml-[20px]">
