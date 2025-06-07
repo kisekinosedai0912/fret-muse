@@ -6,32 +6,76 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
 }
 
-
 .wave-container {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.sound-wave {
-    width: 100%;
-    height: 2px;
-    background: repeating-linear-gradient(
-        90deg,
-        #262626,
-        #262626 4px,
-        transparent 4px,
-        transparent 8px
-    );
-    animation: waveMove 0.5s linear infinite;
+/* 
+** Animation styles
+** Fret page animation styles
+*/
+
+#speech-container,
+#notes-container,
+#facts-container {
+    opacity: 0;
+    will-change: transform, opacity;
 }
 
-@keyframes waveMove {
+.roll-right {
+    animation: rollFromRight 1s ease-out forwards;
+    perspective: 1000px;
+}
+
+.roll-left {
+    animation: rollFromLeft 1s ease-out 0.3s forwards;
+    perspective: 1000px;
+}
+
+.fade-text {
+    opacity: 0;
+    animation: fadeInText 0.5s ease-out 1s forwards;
+}
+
+@keyframes rollFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(200px) rotateY(90deg);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(100px) rotateY(45deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+    }
+}
+
+@keyframes rollFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-200px) rotateY(-90deg);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(-100px) rotateY(-45deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+    }
+}
+
+@keyframes fadeInText {
     from {
-        transform: translateX(0);
+        opacity: 0;
+        transform: translateY(20px);
     }
     to {
-        transform: translateX(-8px);
+        opacity: 1;
+        transform: translateY(0);
     }
 }
-

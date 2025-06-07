@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import Faqs from './Faqs';
@@ -22,6 +22,9 @@ export default function FretPage() {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentNote, setCurrentNote] = useState(getRandomNote());
+    const [isVisible, setIsVisible] = useState(false);
+    const componentRef = useRef(null);
+    
 
     // Randomizing notes
     function getRandomNote() {
@@ -70,6 +73,29 @@ export default function FretPage() {
             window.speechSynthesis.cancel(); // Stop speaking when component unmounts or isPlaying changes
         };
     }, [isPlaying]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // start animation after user scrolls on the page
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            {
+                threshold: 0.2
+            }
+        );
+
+        if (componentRef.current) {
+            observer.observe(componentRef.current);
+        }
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
     
     const handleClickEvent = () => {
         setIsPlaying(!isPlaying);
@@ -78,12 +104,23 @@ export default function FretPage() {
     return (
         <section id='parent-container' className="flex flex-col items-center justify-center gap-[10px] h-screen w-full snap-start">
             {/* Playlist section */}
-            <section className="flex items-center justify-center gap-[20px] h-[calc(80vh-80px)] w-full">
-                <div className="w-[45%] mr-[4%] h-[60%] border border-[#A9BF9F] bg-[#A9BF9F] flex flex-col items-center justify-center p-2" id="speech-container">
-                    <p className="mb-6 font-outfit">Master all the notes in your fretboard <br></br> <span className="ml-[22px]">with this speech assistance tool!</span></p>
+            <section ref={componentRef} className="flex items-center justify-center gap-[20px] h-[calc(80vh-80px)] w-full">
+                <div className={`w-[45%] mr-[4%] h-[60%] border border-[#A9BF9F] 
+                                bg-[#A9BF9F] flex flex-col items-center justify-center p-2 
+                                opacity-0 ${isVisible ? 'roll-right' : ''}`} 
+                                id="speech-container">
+                    <p className={`mb-6 font-outfit ${isVisible ? 'fade-text' : ''}`}>
+                        Master all the notes in your fretboard <br></br> 
+                        <span className="ml-[22px]">
+                            with this speech assistance tool!
+                        </span>
+                    </p>
 
                     {/* Speech input container */}
-                    <div id="speech-input-container" className="w-[80%] h-[80px] border border-[#262626] rounded-lg flex items-center justify-center bg-white">
+                    <div id="speech-input-container" 
+                        className={`w-[80%] h-[80px] border border-[#262626] rounded-lg 
+                        flex items-center justify-center bg-white ${isVisible ? 'fade-text' : ''}`}
+                    >
                         {/* Play line */}
                         <div id="line" className="w-[40%] border border-[#736C12] mr-[20px]"></div>
 
@@ -100,18 +137,29 @@ export default function FretPage() {
                         </button>
                     </div>
                 </div>
-                <div className="w-[35%] h-[60%] border border-[#A9BF9F] border-2 flex flex-col items-center justify-center" id="notes-container">
+                <div className={`w-[35%] h-[60%] border border-[#A9BF9F] border-2 
+                    flex flex-col items-center justify-center opacity-0
+                    ${isVisible ? 'roll-right' : ''}`} 
+                    id="notes-container"
+                >
                     <div id="stringNum-container">
-                        <p className="text-[#262626] font-manrope">{currentNote.string}</p>
+                        <p className={`text-[#262626] font-manrope ${isVisible ? 'fade-text' : ''}`}>
+                            {currentNote.string}
+                        </p>
                     </div>
                     <div id="note-container">
-                        <p className="text-[#262626] font-manrope">{currentNote.note}</p>
+                        <p className={`text-[#262626] font-manrope ${isVisible ? 'fade-text' : ''}`}>
+                            {currentNote.note}
+                        </p>
                     </div>
                 </div>
             </section>
 
             {/* Guitar facts section */}
-            <section id='facts-container' className="flex items-center justify-center w-[86%] h-[calc(30vh-80px)] mt-[20px]">
+            <section ref={componentRef} id='facts-container' 
+                className={`flex items-center justify-center w-[86%] h-[calc(30vh-80px)] mt-[20px] 
+                opacity-0 ${isVisible ? 'roll-left' : ''}`}
+            >
                 <Faqs />
             </section>
        </section>
