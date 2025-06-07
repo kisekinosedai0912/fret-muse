@@ -8,14 +8,19 @@ import { useEffect, useState } from 'react';
 
 export default function RightContainer() {
     const [isVisible, setIsVisible] = useState(false);
+    const [selectedGuitar, setSelectedGuitar] = useState('jazzmaster');
 
     const pyramidBoxes = [
-        { src: lespaul, alt: "les paul guitar", width: "w-[80px]" },
-        { src: jazzmaster, alt: "jazz master guitar", width: "w-[120px]", active: true },
-        { src: hss, alt: "HSS Stratocaster guitar", width: "w-[110px]" },
-        { src: superstrat, alt: "Super Stratocaster Ibanez guitar", width: "w-[120px]", rotate: true },
-        { src: sg, alt: "Gibson SG guitar", width: "w-[110px]", rotate: true }
+        { id: 'lespaul', src: lespaul, alt: "les paul guitar", width: "w-[80px]", name: "Les Paul" },
+        { id: 'jazzmaster', src: jazzmaster, alt: "jazz master guitar", width: "w-[120px]", name: "Jazz Master" },
+        { id: 'hss', src: hss, alt: "HSS Stratocaster guitar", width: "w-[110px]", name: "HSS Stratocaster" },
+        { id: 'superstrat', src: superstrat, alt: "Super Stratocaster Ibanez guitar", width: "w-[120px]", name: "Super Stratocaster" },
+        { id: 'sg', src: sg, alt: "Gibson SG guitar", width: "w-[110px]", name: "Gibson SG" }
     ];
+
+    const handleGuitarSelect = (guitarId) => {
+        setSelectedGuitar(guitarId);
+    };
 
     useEffect(() => {
         setIsVisible(true);
@@ -26,23 +31,26 @@ export default function RightContainer() {
             {/* Right container - image container */}
             <section className="flex-1 flex-col z-[4] relative mt-[40px]">
                 <div className="h-full max-h-[calc(100vh-82px)] flex items-start justify-center">
-                    <div className={`mt-[-17%] flex flex-col items-center ${isVisible ? 'slide-guitar' : ''}`}>
-                        <img 
-                            src={jazzmaster} 
-                            alt="jazz master guitar" 
-                            loading='lazy'
-                            className="w-[700px] h-auto object-contain mix-blend-multiply"
-                        />
+                    <div className={`mt-[-2%] flex flex-col items-center ${isVisible ? 'slide-guitar' : ''}`}>
+                        <div className="w-[700px] h-[500px] flex items-center justify-center"> 
+                            <img 
+                                src={pyramidBoxes.find(g => g.id === selectedGuitar).src} 
+                                alt={pyramidBoxes.find(g => g.id === selectedGuitar).alt} 
+                                loading='lazy'
+                                className="max-w-[700px] max-h-[500px] w-auto h-auto object-contain mix-blend-multiply 
+                                    transition-all duration-300"
+                            />
+                        </div>
                     </div>
                     <span 
                         id="guitarName" 
-                        className={`absolute right-[320px] top-[410px] font-outfit text-xl 
+                        className={`absolute right-[280px] top-[410px] font-outfit text-xl 
                             px-[10px] bg-[#736C12] text-white ${isVisible ? 'slide-guitar-name' : ''}`}
                         style={{
                             clipPath: 'polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25%)'
                         }}
                     >
-                        Jazz Master
+                        {pyramidBoxes.find(g => g.id === selectedGuitar).name}
                     </span>
                 </div>
 
@@ -50,11 +58,15 @@ export default function RightContainer() {
                 <div className="absolute bottom-[5%] left-1/2 transform -translate-x-1/2 flex items-end gap-4 justify-center">
                     {pyramidBoxes.map((guitar, index) => (
                         <div 
-                            key={guitar.alt}
+                            key={guitar.id}
+                            onClick={() => handleGuitarSelect(guitar.id)}
                             className={`
                                 flex items-center justify-center 
                                 w-[120px] 
-                                ${guitar.active ? 'h-[140px] bg-[#748E67]' : 'h-[120px] bg-transparent hover:bg-[#A9BF9F] hover:h-[140px]'} 
+                                ${selectedGuitar === guitar.id 
+                                    ? 'h-[140px] bg-[#748E67]' 
+                                    : 'h-[120px] bg-[#A9BF9F] hover:bg-[#748E67] hover:h-[140px]'
+                                } 
                                 border-2 border-[#A9BF9F] rounded-lg 
                                 transition-all duration-300 cursor-pointer
                                 opacity-0 ${isVisible ? `paper-fly-${index + 1}` : ''}
@@ -67,6 +79,7 @@ export default function RightContainer() {
                                 className={`
                                     ${guitar.width} h-auto object-contain mix-blend-multiply z-7
                                     ${guitar.rotate ? 'transform rotate-[-90deg]' : ''}
+                                    transition-transform duration-300
                                 `}
                             />
                         </div>

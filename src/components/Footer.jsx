@@ -32,11 +32,11 @@ export default function Footer() {
             <div className="flex flex-col items-start justify-start gap-[4px] p-2">
                 <p className={`text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
                    style={{ animationDelay: '0.4s' }}>
-                    &copy; {new Date().getFullYear()} FretMuse, Your Guitar Mastery Partner. All rights reserved.
+                    &copy; {new Date().getFullYear()} <b>FretMuse</b>, Your Guitar Mastery Partner. All rights reserved.
                 </p>
                 <p className={`font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
                    style={{ animationDelay: '0.3s' }}>
-                    Personal Project Idea built from React.Js
+                    Personal Project Idea built from <b>React.Js</b>
                 </p>
             </div>
 
@@ -44,11 +44,15 @@ export default function Footer() {
             <div className="flex flex-col items-start justify-start gap-[4px] p-2">
                 <p className={`text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
                    style={{ animationDelay: '0.2s' }}>
-                    Job/Position: Web/Software Developer
+                    <b>Job/Position:</b> Web/Software Developer
                 </p>
                 <p className={`text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
                    style={{ animationDelay: '0.1s' }}>
-                    Status: Junior Developer
+                    <b>Status:</b> Junior Developer
+                </p>
+                <p className={`text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
+                   style={{ animationDelay: '0.1s' }}>
+                    <b>Tech Stack Used:</b> React Js + Vite, Tailwind CSS + CSS & MUI
                 </p>
             </div>
 

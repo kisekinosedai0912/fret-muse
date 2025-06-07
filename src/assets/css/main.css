@@ -121,6 +121,10 @@ footer p {
 .paper-fly-4 { animation: paperFly 1s ease-out 0.8s forwards; }
 .paper-fly-5 { animation: paperFly 1s ease-out 1.0s forwards; }
 
+.guitar-change {
+    animation: guitarChange 0.3s ease-out;
+}
+
 @keyframes paperFly {
   0% {
     opacity: 0;
@@ -136,6 +140,17 @@ footer p {
     opacity: 1;
     transform: translate(0, 0) rotate(0) scale(1);
   }
+}
+
+@keyframes guitarChange {
+    0% {
+        opacity: 0.8;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Footer component animation styles */
