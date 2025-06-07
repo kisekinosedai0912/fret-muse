@@ -1,5 +1,5 @@
 a {
-    list-style: none;
+  list-style: none;
 }
 
 header {
@@ -14,11 +14,11 @@ header {
 }
 
 .hamburger-menu {
-    transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .hamburger-menu span {
-    transform-origin: center;
+  transform-origin: center;
 }
 
 .glassmorphism {

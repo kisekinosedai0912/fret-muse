@@ -5,15 +5,39 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SchoolIcon from '@mui/icons-material/School';
 import '../assets/css/nav.css'; 
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Nav() {
     const [isOpen, setIsOpen] = useState(false);
-    const [activeLink, setActiveLink] = useState('home');
     const [isVisible, setIsVisible] = useState(false);
+    const [activeLink, setActiveLink] = useState('/home');
+    const location = useLocation();
+
+    const isActive = (path) => activeLink === path;
 
     useEffect(() => {
         setIsVisible(true);
+
+        // Default view to home after page load
+        const target = document.getElementById('home-wrapper');
+        if (target && location.pathname === '/fretmuse/home') {
+            target.scrollIntoView({ behavior: 'auto' });
+        }
     }, []);
+
+    const handleLinkRouting = (e, targetId, path) => {
+        e.preventDefault();
+        const target = document.getElementById(targetId);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+            setActiveLink(path);
+        }
+        setIsOpen(false);
+    };
+
+    const handleLogoClick = (e) => {
+        handleLinkRouting(e, 'home-wrapper', '/home');
+    };
 
     return (
         <header className={`w-full fixed top-0 left-0 right-0 z-50 bg-[#F5F5F5] opacity-0 
@@ -45,52 +69,71 @@ export default function Nav() {
                         ${isOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
                         <div className={`glassmorphism rounded-b-md p-[16px] shadow-lg transform transition-transform duration-300
                             ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-                            <a href="#" className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center">
+                            <Link 
+                                to="/fretmuse/home" 
+                                className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center"
+                                onClick={(e) => handleLinkRouting(e, 'home-wrapper', '/home')}
+                            >
                                 <HomeIcon className="text-[#262626] text-xl mr-[4px]" />
                                 Home
-                            </a>
-                            <a href="#" className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center">
+                            </Link>
+                            <Link 
+                                to="/fretmuse/home" 
+                                className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center"
+                                onClick={(e) => handleLinkRouting(e, 'fret-wrapper', '/fret-mastery')}
+                            >
                                 <MusicNoteIcon className="text-[#262626] text-xl mr-[4px]" />
                                 Fret Mastery
-                            </a>
-                            <a href="#" className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit flex items-center">
+                            </Link>
+                            <Link 
+                                to="/fretmuse/home" 
+                                className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center"
+                                onClick={(e) => handleLinkRouting(e, 'scale-wrapper', '/learn-scales')}
+                            >
                                 <SchoolIcon className="text-[#262626] text-xl mr-[4px]" />
                                 Learn Scales
-                            </a>
+                            </Link>
                         </div>
                     </div>
 
-                    <span className="text-lg font-satisfy text-[#262626]" id="webName">Fret Muse</span>
+                    <Link 
+                        to="/fretmuse/home"
+                        onClick={handleLogoClick}
+                        className="text-lg font-satisfy text-[#262626] cursor-pointer hover:opacity-80 transition-opacity"
+                        id="webName"
+                    >
+                        Fret Muse
+                    </Link>
                 </div>
 
                 {/* Center section: Nav Links */}
                 <ul className="flex-1 flex items-center justify-center gap-[20px] list-none mb-[10px]">
                     <li>
-                        <a 
-                            href="#" 
-                            className={`nav-link font-outfit ${activeLink === 'home' ? 'active' : ''}`}
-                            onClick={() => setActiveLink('home')}
+                        <Link 
+                            to="/fretmuse/home"
+                            className={`nav-link font-outfit ${isActive('/home') ? 'active' : ''}`}
+                            onClick={(e) => handleLinkRouting(e, 'home-wrapper', '/home')}
                         >
                             Home
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a 
-                            href="#" 
-                            className={`nav-link font-outfit ${activeLink === 'fret' ? 'active' : ''}`}
-                            onClick={() => setActiveLink('fret')}
+                        <Link 
+                            to="/fretmuse/fret-mastery"
+                            className={`nav-link font-outfit ${isActive('/fret-mastery') ? 'active' : ''}`}
+                            onClick={(e) => handleLinkRouting(e, 'fret-wrapper', '/fret-mastery')}
                         >
                             Fret Mastery
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a 
-                            href="#" 
-                            className={`nav-link font-outfit ${activeLink === 'scales' ? 'active' : ''}`}
-                            onClick={() => setActiveLink('scales')}
+                        <Link 
+                            to="/fretmuse/learn-scales"
+                            className={`nav-link font-outfit ${isActive('/learn-scales') ? 'active' : ''}`}
+                            onClick={(e) => handleLinkRouting(e, 'scale-wrapper', '/learn-scales')}
                         >
                             Learn Scales
-                        </a>
+                        </Link>
                     </li>
                 </ul>
 
