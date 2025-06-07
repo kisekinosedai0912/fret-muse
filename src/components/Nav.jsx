@@ -54,7 +54,7 @@ export default function Nav() {
                         </div>
                     </div>
 
-                    <span className="text-lg font-satisfy" id="webName">Fret Muse</span>
+                    <span className="text-lg font-satisfy text-[#262626]" id="webName">Fret Muse</span>
                 </div>
 
                 {/* Center section: Nav Links */}

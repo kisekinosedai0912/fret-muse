@@ -33,3 +33,107 @@ footer p {
     font-size: small;
     color: #BFBFBF;
 }
+
+/* 
+** Animation styles 
+** Left component animation styles
+*/
+
+.slide-top {
+    animation: slideTop 1s ease-out forwards;
+    opacity: 0;
+    transform: translate(20px, -100%);
+}
+
+.slide-middle {
+    animation: slideMiddle 1.2s ease-out forwards;
+    transform: translateX(-100%);
+}
+
+.slide-bottom {
+    animation: slideBottom 1s ease-out forwards;
+    opacity: 0;
+    transform: translate(-20px, 100%);
+}
+
+.fade-text {
+    animation: fadeIn 0.8s ease-out 1.2s forwards;
+    opacity: 0;
+}
+
+@keyframes slideTop {
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes slideMiddle {
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideBottom {
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Right component animation styles */
+.slide-guitar {
+    animation: slideGuitar 1.2s ease-out forwards;
+    opacity: 0;
+    transform: translate(100%, 0) rotate(54deg);
+}
+
+.slide-guitar-name {
+    animation: slideGuitarName 0.8s ease-out 0.8s forwards;
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+@keyframes slideGuitar {
+    to {
+        opacity: 1;
+        transform: translate(0, 0) rotate(54deg);
+    }
+}
+
+@keyframes slideGuitarName {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pyramid container animation styles */
+.paper-fly-1 { animation: paperFly 1s ease-out 0.2s forwards; }
+.paper-fly-2 { animation: paperFly 1s ease-out 0.4s forwards; }
+.paper-fly-3 { animation: paperFly 1s ease-out 0.6s forwards; }
+.paper-fly-4 { animation: paperFly 1s ease-out 0.8s forwards; }
+.paper-fly-5 { animation: paperFly 1s ease-out 1.0s forwards; }
+
+@keyframes paperFly {
+  0% {
+    opacity: 0;
+    transform: translate(200px, -100px) rotate(45deg) scale(0.5);
+  }
+  60% {
+    transform: translate(0, 0) rotate(-15deg) scale(1.1);
+  }
+  80% {
+    transform: translate(0, 0) rotate(5deg) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+}
