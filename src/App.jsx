@@ -7,9 +7,9 @@ export default function App() {
       	<Router>
 			<Routes>
 				{/* Redirect root to home */}
-				<Route path="/" element={<Navigate to="/fretmuse/home" replace />} />
+				<Route path="/" element={<Navigate to="/home" replace />} />
 				
-				<Route path="/fretmuse/*" element={
+				<Route path="/*" element={
 				<>
 					<Nav />
 					<Main />
