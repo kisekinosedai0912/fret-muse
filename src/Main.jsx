@@ -11,3 +11,4 @@ root.render(
     </StrictMode>
   </>
 );
+// Renamed Main.jsx into main.jsx for vite to compile.
