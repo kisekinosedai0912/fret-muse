@@ -4,7 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SchoolIcon from '@mui/icons-material/School';
 import '../assets/css/nav.css'; 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Nav() {
@@ -25,12 +25,43 @@ export default function Nav() {
 
     const isActive = (path) => activeLink === path;
 
+    // Sets active link based on the path currently in
+    useEffect(() => {
+        setActiveLink(location.pathname);
+    }, [location.pathname]);
+
+    const handleScroll = useCallback(() => {
+        const sections = {
+            'home-wrapper': '/home',
+            'fret-wrapper': '/fret-mastery',
+            'scale-wrapper': '/learn-scales'
+        };
+
+        const viewportHeight = window.innerHeight;
+        const scrollPosition = window.scrollY;
+
+        Object.entries(sections).forEach(([sectionId, path]) => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const { top, bottom } = element.getBoundingClientRect();
+                if (top <= viewportHeight/2 && bottom >= viewportHeight/2) {
+                    setActiveLink(path);
+                }
+            }
+        });
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [handleScroll]);
+
     useEffect(() => {
         setIsVisible(true);
 
         // Default view to home after page load
         const target = document.getElementById('home-wrapper');
-        if (target && location.pathname === '/fretmuse/home') {
+        if (target && location.pathname === '/home') {
             target.scrollIntoView({ behavior: 'auto' });
         }
     }, []);
@@ -41,6 +72,8 @@ export default function Nav() {
         if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
             setActiveLink(path);
+
+            window.history.pushState({}, '', path); // prevents page reload while changing page
         }
         setIsOpen(false);
     };

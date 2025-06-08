@@ -24,7 +24,7 @@ export default function Main() {
 
     // accessing the link to home page by default and scroll to other page link paths if selected
     useEffect(() => {
-        if (initialLoad.current && location.pathname === '/home') {
+        if (initialLoad.current) {
             const homeSection = document.getElementById('home-wrapper');
             if (homeSection) {
                 homeSection.scrollIntoView({ behavior: 'auto' });
@@ -33,15 +33,13 @@ export default function Main() {
             return;
         }
 
-        // Link paths to other page
-        const path = location.pathname;
         const sectionMap = {
             '/home': 'home-wrapper',
             '/fret-mastery': 'fret-wrapper',
             '/learn-scales': 'scale-wrapper'
         };
 
-        const targetId = sectionMap[path];
+        const targetId = sectionMap[location.pathname];
         if (targetId) {
             const target = document.getElementById(targetId);
             if (target) {
