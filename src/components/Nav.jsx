@@ -80,7 +80,7 @@ export default function Nav() {
                         <div className={`glassmorphism rounded-b-md p-[16px] shadow-lg transform transition-transform duration-300
                             ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
                             <Link 
-                                to="/fretmuse/home" 
+                                to="/home" 
                                 className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center"
                                 onClick={(e) => handleLinkRouting(e, 'home-wrapper', '/home')}
                             >
@@ -88,7 +88,7 @@ export default function Nav() {
                                 Home
                             </Link>
                             <Link 
-                                to="/fretmuse/home" 
+                                to="/home" 
                                 className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center"
                                 onClick={(e) => handleLinkRouting(e, 'fret-wrapper', '/fret-mastery')}
                             >
@@ -96,7 +96,7 @@ export default function Nav() {
                                 Fret Mastery
                             </Link>
                             <Link 
-                                to="/fretmuse/home" 
+                                to="/home" 
                                 className="font-outfit no-underline block px-5 py-4 text-[#262626] hover:bg-[#8fa584] transition-colors duration-200 font-outfit border-b border-[#8fa584] flex items-center"
                                 onClick={(e) => handleLinkRouting(e, 'scale-wrapper', '/learn-scales')}
                             >
@@ -107,7 +107,7 @@ export default function Nav() {
                     </div>
 
                     <Link 
-                        to="/fretmuse/home"
+                        to="/home"
                         onClick={handleLogoClick}
                         className="text-lg font-satisfy text-[#262626] cursor-pointer hover:opacity-80 transition-opacity"
                         id="webName"
@@ -120,7 +120,7 @@ export default function Nav() {
                 <ul className={`${isMobile && 'hidden'} flex-1 flex items-center justify-center gap-[20px] list-none mb-[10px]`}>
                     <li>
                         <Link 
-                            to="/fretmuse/home"
+                            to="/home"
                             className={`nav-link font-outfit ${isActive('/home') ? 'active' : ''}`}
                             onClick={(e) => handleLinkRouting(e, 'home-wrapper', '/home')}
                         >
@@ -129,7 +129,7 @@ export default function Nav() {
                     </li>
                     <li>
                         <Link 
-                            to="/fretmuse/fret-mastery"
+                            to="/fret-mastery"
                             className={`nav-link font-outfit ${isActive('/fret-mastery') ? 'active' : ''}`}
                             onClick={(e) => handleLinkRouting(e, 'fret-wrapper', '/fret-mastery')}
                         >
@@ -138,7 +138,7 @@ export default function Nav() {
                     </li>
                     <li>
                         <Link 
-                            to="/fretmuse/learn-scales"
+                            to="/learn-scales"
                             className={`nav-link font-outfit ${isActive('/learn-scales') ? 'active' : ''}`}
                             onClick={(e) => handleLinkRouting(e, 'scale-wrapper', '/learn-scales')}
                         >
