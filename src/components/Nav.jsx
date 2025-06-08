@@ -139,10 +139,10 @@ export default function Nav() {
 
                 {/* Right section: Optional socmed accounts */}
                 <div className="w-[340px] flex space-x-4 items-center justify-center overflow-x-hidden">
-                   <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                   <a href="https://www.facebook.com/jasper.perks" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                         <FacebookIcon className="text-[#262626] hover:text-gray-600" />
                     </a>
-                    <a href="mailto:your-email@gmail.com" aria-label="Email">
+                    <a href="mailto:kisekinosedai0912@gmail.com" aria-label="Email">
                         <EmailIcon className="text-[#262626] hover:text-gray-600" />
                     </a>
                 </div> 

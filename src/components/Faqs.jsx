@@ -3,7 +3,7 @@ import '../assets/css/fretpage.css';
 export default function Faqs() {
     return (
         <>
-            <div className="flex gap-[10px] w-full">
+            <section className="flex gap-[10px] w-full">
                 <div className="flex-1 p-[8px] h-[150px] glass-orange rounded-lg">
                     <p className='font-outfit-bold'>Keith Richards</p>
                     <p className='font-outfit-small'>– “you’re always learning about this thing every time you pick it up”</p>
@@ -20,7 +20,7 @@ export default function Faqs() {
                     <p className='font-outfit-bold'>Zakk Wylde</p>
                     <p className='font-outfit-small'>– “Great musicians, you don’t just hear them, you feel them. When I listen to Randy Rhoads, I feel every note. I learned a lot from him.”</p>
                 </div>
-            </div>
+            </section>
         </>
     );
 };

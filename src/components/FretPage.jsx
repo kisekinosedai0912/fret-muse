@@ -105,7 +105,7 @@ export default function FretPage() {
         <section id='parent-container' className="flex flex-col items-center justify-center gap-[10px] h-screen w-full snap-start">
             {/* Playlist section */}
             <section ref={componentRef} className="flex items-center justify-center gap-[20px] h-[calc(80vh-80px)] w-full">
-                <div className={`w-[45%] mr-[4%] h-[60%] border border-[#A9BF9F] 
+                <aside className={`w-[45%] mr-[4%] h-[60%] border border-[#A9BF9F] 
                                 bg-[#A9BF9F] flex flex-col items-center justify-center p-2 
                                 opacity-0 ${isVisible ? 'roll-right' : ''}`} 
                                 id="speech-container">
@@ -136,8 +136,8 @@ export default function FretPage() {
                             }
                         </button>
                     </div>
-                </div>
-                <div className={`w-[35%] h-[60%] border border-[#A9BF9F] border-2 
+                </aside>
+                <aside className={`w-[35%] h-[60%] border border-[#A9BF9F] border-2 
                     flex flex-col items-center justify-center opacity-0
                     ${isVisible ? 'roll-right' : ''}`} 
                     id="notes-container"
@@ -152,7 +152,7 @@ export default function FretPage() {
                             {currentNote.note}
                         </p>
                     </div>
-                </div>
+                </aside>
             </section>
 
             {/* Guitar facts section */}
