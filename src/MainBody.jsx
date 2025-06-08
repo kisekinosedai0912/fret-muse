@@ -24,7 +24,7 @@ export default function Main() {
 
     // accessing the link to home page by default and scroll to other page link paths if selected
     useEffect(() => {
-        if (initialLoad.current && location.pathname === '/fretmuse/home') {
+        if (initialLoad.current && location.pathname === '/') {
             const homeSection = document.getElementById('home-wrapper');
             if (homeSection) {
                 homeSection.scrollIntoView({ behavior: 'auto' });
