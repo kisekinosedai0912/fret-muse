@@ -121,6 +121,16 @@ export default function ScalesPage() {
     const [selectedScale, setSelectedScale] = useState('major-scale');
     const [isVisible, setIsVisible] = useState(false);
     const componentRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Split images into two rows this is done to ensure that the images are displayed in two rows
     const currentScaleImages = scalesData[selectedScale].images;
@@ -162,7 +172,9 @@ export default function ScalesPage() {
     };
 
     return (
-        <section ref={componentRef} id='parent-container' className="flex flex-col items-center justify-start mt-[100px] min-h-screen w-full snap-start">
+        <section ref={componentRef} id='parent-container' 
+            className={`relative flex flex-col items-center justify-start mt-[100px] min-h-screen w-full snap-start overflow-hidden`}
+        >
             {/* Dropdown container */}
             <div id="filter-container" 
                 className={`flex items-center justify-start gap-[100px] w-[92%] h-[60px] opacity-0 
@@ -191,18 +203,40 @@ export default function ScalesPage() {
                 }
             </div>
 
-            {/* Content container */}
-            <div className="w-[92%] flex flex-col items-center justify-center gap-[20px] mt-[20px]">
-                {/* First row */}
-                <div className="flex gap-[20px]">
-                    {renderScaleImages(firstRow)}
-                </div>
+            {/* Render layout based on screen state container */}
+            { !isMobile 
+                ? 
+                    <div className="w-[92%] flex flex-col items-center justify-center gap-[20px] mt-[20px]">
+                        {/* First row */}
+                        <div className="flex gap-[20px]">
+                            {renderScaleImages(firstRow)}
+                        </div>
 
-                {/* Second row */}
-                <div className="flex gap-[20px] justify-center">
-                    {renderScaleImages(secondRow)}
-                </div>
-            </div>
+                        {/* Second row */}
+                        <div className="flex gap-[20px] justify-center">
+                            {renderScaleImages(secondRow)}
+                        </div>
+                    </div>
+                :
+                    <div className="relative w-[92%] h-[calc(100vh-200px)] overflow-hidden">
+                        <div className="absolute inset-0 overflow-y-auto scale-content-container">
+                            <div className="flex flex-col items-center gap-[20px] pb-[120px]">
+                                {/* First row */}
+                                <div className={`flex ${isMobile ? 'flex-col gap-[4px]' : 'gap-[20px]'}`}>
+                                    {renderScaleImages(firstRow)}
+                                </div>
+
+                                {/* Second row */}
+                                <div className={`flex ${isMobile ? 'flex-col gap-[4px]' : 'gap-[20px]'} justify-center`}>
+                                    {renderScaleImages(secondRow)}
+                                </div>
+                            </div>
+                        </div>
+                        {/* Gradient overlay div */}
+                        <div className="absolute bottom-0 left-0 right-0 h-[20px] bg-gradient-to-t from-[rgba(245,245,245,0.2)] to-transparent pointer-events-none"></div>
+                    </div>
+            }
         </section>
     );
 }
+// Responsive scales page done.

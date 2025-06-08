@@ -9,13 +9,23 @@ import { useEffect, useState } from 'react';
 export default function RightContainer() {
     const [isVisible, setIsVisible] = useState(false);
     const [selectedGuitar, setSelectedGuitar] = useState('jazzmaster');
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const pyramidBoxes = [
-        { id: 'lespaul', src: lespaul, alt: "les paul guitar", width: "w-[80px]", name: "Les Paul" },
+        { id: 'lespaul', src: lespaul, alt: "les paul guitar", width: "w-[70px]", name: "Les Paul" },
         { id: 'jazzmaster', src: jazzmaster, alt: "jazz master guitar", width: "w-[120px]", name: "Jazz Master" },
-        { id: 'hss', src: hss, alt: "HSS Stratocaster guitar", width: "w-[110px]", name: "HSS Stratocaster" },
-        { id: 'superstrat', src: superstrat, alt: "Super Stratocaster Ibanez guitar", width: "w-[120px]", name: "Super Stratocaster" },
-        { id: 'sg', src: sg, alt: "Gibson SG guitar", width: "w-[110px]", name: "Gibson SG" }
+        { id: 'hss', src: hss, alt: "HSS Stratocaster guitar", width: "w-[100px]", name: "HSS Stratocaster" },
+        { id: 'superstrat', src: superstrat, alt: "Super Stratocaster Ibanez guitar", width: "w-[110px]", name: "Super Stratocaster" },
+        { id: 'sg', src: sg, alt: "Gibson SG guitar", width: "w-[100px]", name: "Gibson SG" }
     ];
 
     const handleGuitarSelect = (guitarId) => {
@@ -29,8 +39,9 @@ export default function RightContainer() {
     return (
         <>
             {/* Right container - image container */}
-            <section className="flex-1 flex-col z-[4] relative mt-[40px]">
-                <div className="h-full max-h-[calc(100vh-82px)] flex items-start justify-center">
+            <section className="flex-1 flex flex-col justify-between z-[4] relative mt-[40px] h-[calc(100vh-82px)]">
+                {/* Guitar image container */}
+                <div className="flex-1 flex items-start justify-center">
                     <div className={`mt-[-2%] flex flex-col items-center ${isVisible ? 'slide-guitar' : ''}`}>
                         <div className="w-[700px] h-[500px] flex items-center justify-center"> 
                             <img 
@@ -42,9 +53,10 @@ export default function RightContainer() {
                             />
                         </div>
                     </div>
+                    {/* Guitar name */}
                     <span 
                         id="guitarName" 
-                        className={`absolute right-[280px] top-[410px] font-outfit text-xl 
+                        className={`absolute ${isMobile ? 'right-[30px] top-[360px]' : 'right-[280px] top-[410px]'}  font-outfit text-xl 
                             px-[10px] bg-[#736C12] text-white ${isVisible ? 'slide-guitar-name' : ''}`}
                         style={{
                             clipPath: 'polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 25%)'
@@ -55,37 +67,45 @@ export default function RightContainer() {
                 </div>
 
                 {/* pyramid containers */}
-                <div className="absolute bottom-[5%] left-1/2 transform -translate-x-1/2 flex items-end gap-4 justify-center">
-                    {pyramidBoxes.map((guitar, index) => (
-                        <div 
-                            key={guitar.id}
-                            onClick={() => handleGuitarSelect(guitar.id)}
-                            className={`
-                                flex items-center justify-center 
-                                w-[120px] 
-                                ${selectedGuitar === guitar.id 
-                                    ? 'h-[140px] bg-[#748E67]' 
-                                    : 'h-[120px] bg-[#A9BF9F] hover:bg-[#748E67] hover:h-[140px]'
-                                } 
-                                border-2 border-[#A9BF9F] rounded-lg 
-                                transition-all duration-300 cursor-pointer
-                                opacity-0 ${isVisible ? `paper-fly-${index + 1}` : ''}
-                            `}
-                        >
-                            <img 
-                                src={guitar.src}
-                                alt={guitar.alt}
-                                loading='lazy'
+                <div className={`w-full ${!isMobile && 'overflow-x-hidden overflow-y-hidden'} overflow-x-auto scrollbar-none`}>
+                    <div className={`
+                        flex items-end gap-4 
+                        ${isMobile ? 'justify-start px-4 min-w-max' : 'justify-center'} 
+                        pb-[${isMobile ? '20px' : '5%'}]
+                    `}>
+                        {pyramidBoxes.map((guitar, index) => (
+                            <div 
+                                key={guitar.id}
+                                onClick={() => handleGuitarSelect(guitar.id)}
                                 className={`
-                                    ${guitar.width} h-auto object-contain mix-blend-multiply z-7
-                                    ${guitar.rotate ? 'transform rotate-[-90deg]' : ''}
-                                    transition-transform duration-300
+                                    flex-shrink-0
+                                    flex items-center justify-center 
+                                    w-[120px] 
+                                    ${selectedGuitar === guitar.id 
+                                        ? 'h-[140px] bg-[#748E67]' 
+                                        : 'h-[120px] bg-[#A9BF9F] hover:bg-[#748E67] hover:h-[140px]'
+                                    } 
+                                    border-2 border-[#A9BF9F] rounded-lg 
+                                    transition-all duration-300 cursor-pointer
+                                    opacity-0 ${isVisible ? `paper-fly-${index + 1}` : ''}
                                 `}
-                            />
-                        </div>
-                    ))}
+                            >
+                                <img 
+                                    src={guitar.src}
+                                    alt={guitar.alt}
+                                    loading='lazy'
+                                    className={`
+                                        ${guitar.width} h-auto object-contain mix-blend-multiply z-7
+                                        ${guitar.rotate ? 'transform rotate-[-90deg]' : ''}
+                                        transition-transform duration-300
+                                    `}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
         </>
     );
 }
+// Responsive right component done.

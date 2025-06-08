@@ -28,6 +28,10 @@ body {
   overflow-x: hidden;
 }
 
+#root {
+  overflow-x: hidden;
+}
+
 .font-satisfy {
   font-family: "Satisfy", cursive;
   font-weight: 900;

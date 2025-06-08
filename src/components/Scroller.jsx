@@ -5,6 +5,16 @@ import '../assets/css/main.css';
 
 export default function Scroll() {
     const [isBottom, setIsBottom] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,9 +44,9 @@ export default function Scroll() {
     };
 
     return (
-        <div onClick={handleClick} className="fixed bottom-[4px] left-[40px] z-50 bg-[#736C12] cursor-pointer 
+        <div onClick={handleClick} className={`fixed bottom-[4px] ${!isMobile ? 'left-[40px] w-[3%] h-[7%]' : 'right-[2px] w-[10%] h-[8%]'} z-50 bg-[#736C12] cursor-pointer 
                                               p-2 hover:scale-110 transition-transform duration-200 flex 
-                                              flex-col items-center justify-center gap-2 w-[3%] h-[7%]"
+                                              flex-col items-center justify-center gap-2`}
         >
             <span className="font-outfit-small" id="scroll">Scroll</span>
             {isBottom ? (
@@ -47,3 +57,4 @@ export default function Scroll() {
         </div>
     );
 }
+// Responsive scroller component done.

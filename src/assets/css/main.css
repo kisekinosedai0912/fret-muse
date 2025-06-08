@@ -14,7 +14,7 @@
     backdrop-filter: blur(2px);
 }
 
-#box-2, p {
+#box-2 p {
     font-size: x-large;
 }
 
@@ -32,6 +32,19 @@
 footer p {
     font-size: small;
     color: #BFBFBF;
+}
+
+/* 
+** Responsive styles
+*/
+@media only  screen and (max-width: 768px) {
+    footer p, footer span {
+        font-size: 10px;
+        color: #BFBFBF;
+    }
+    #box-2 p {
+        font-size: large;
+    }
 }
 
 /* 

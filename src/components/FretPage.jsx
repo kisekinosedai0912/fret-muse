@@ -24,7 +24,16 @@ export default function FretPage() {
     const [currentNote, setCurrentNote] = useState(getRandomNote());
     const [isVisible, setIsVisible] = useState(false);
     const componentRef = useRef(null);
-    
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Randomizing notes
     function getRandomNote() {
@@ -102,16 +111,21 @@ export default function FretPage() {
     }
 
     return (
-        <section id='parent-container' className="flex flex-col items-center justify-center gap-[10px] h-screen w-full snap-start">
+        <section id='parent-container' className={`flex flex-col items-center justify-center ${isMobile ? 'gap-[40px]' : 'gap-[10px]' } h-screen w-full snap-start`}>
             {/* Playlist section */}
-            <section ref={componentRef} className="flex items-center justify-center gap-[20px] h-[calc(80vh-80px)] w-full">
+            <section ref={componentRef} className={`flex ${!isMobile ? 'items-center justify-center' : 'items-start justify-center' } ${!isMobile ? 'gap-[20px]' : 'gap-[4px]'} h-[calc(80vh-80px)] w-full`}>
                 <aside className={`w-[45%] mr-[4%] h-[60%] border border-[#A9BF9F] 
                                 bg-[#A9BF9F] flex flex-col items-center justify-center p-2 
                                 opacity-0 ${isVisible ? 'roll-right' : ''}`} 
                                 id="speech-container">
-                    <p className={`mb-6 font-outfit ${isVisible ? 'fade-text' : ''}`}>
-                        Master all the notes in your fretboard <br></br> 
-                        <span className="ml-[22px]">
+                                    {/* center text if in mobile view */}
+                    <p className={`${isMobile && 'text-center'} mb-6 font-outfit ${isVisible ? 'fade-text' : ''}`}>
+                        Master all the notes in your fretboard 
+                        {/* adding break if not in mobile view */}
+                        {!isMobile && <br></br>}
+
+                        {/* adding margin on start when not in mobile view */}
+                        <span className={`${!isMobile && 'ml-[22px]'}`}>
                             with this speech assistance tool!
                         </span>
                     </p>
@@ -165,3 +179,4 @@ export default function FretPage() {
        </section>
     );
 }
+// Responsive fret mastery page done.

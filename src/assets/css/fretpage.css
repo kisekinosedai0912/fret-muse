@@ -12,6 +12,23 @@
     position: relative;
 }
 
+aside p {
+    font-size: x-large;
+}
+
+/* 
+** Responsive styles
+*/
+@media only  screen and (max-width: 768px) {
+    aside p {
+        font-size: small;
+    }
+
+    #quotes p {
+        font-size: smaller;
+    }
+}
+
 /* 
 ** Animation styles
 ** Fret page animation styles
