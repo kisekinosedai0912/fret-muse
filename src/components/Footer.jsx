@@ -7,6 +7,16 @@ import { useState, useEffect, useRef } from 'react';
 export default function Footer() {
     const [isVisible, setIsVisible] = useState(false);
     const footerRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -27,11 +37,12 @@ export default function Footer() {
     }, []);
 
     return (
-        <footer ref={footerRef} className="flex items-center justify-evenly gap-[30px] w-full h-[15dvh] bg-[#262626] text-white font-outfit-small p-[12px]">
+        <footer ref={footerRef} className={`flex items-center justify-evenly ${!isMobile ? 'gap-[30px]' : 'gap-[10px]' } w-full h-[15dvh] bg-[#262626] text-white font-outfit-small p-[12px]`}>
             {/* First footer content */}
             <div className="flex flex-col items-start justify-start gap-[4px] p-2">
-                <p className={`text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
+                <p className={`${!isMobile && 'text-center'} font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
                    style={{ animationDelay: '0.4s' }}>
+                    <span className='hidden'>jsprbndl</span>
                     &copy; {new Date().getFullYear()} <b>FretMuse</b>, Your Guitar Mastery Partner. All rights reserved.
                 </p>
                 <p className={`font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
@@ -41,16 +52,16 @@ export default function Footer() {
             </div>
 
             {/* Second footer content */}
-            <div className="flex flex-col items-start justify-start gap-[4px] p-2">
-                <p className={`text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
+            <div className={`flex flex-col items-start justify-start ${!isMobile && 'gap-[4px]'} p-2`}>
+                <p className={`${!isMobile && 'text-center'} font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
                    style={{ animationDelay: '0.2s' }}>
                     <b>Job/Position:</b> Web/Software Developer
                 </p>
-                <p className={`text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
+                <p className={`${isMobile && 'hidden'} text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
                    style={{ animationDelay: '0.1s' }}>
                     <b>Status:</b> Junior Developer
                 </p>
-                <p className={`text-center font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
+                <p className={`${!isMobile && 'text-center'} font-manrope-light ${isVisible ? 'slide-text' : 'opacity-0'}`}
                    style={{ animationDelay: '0.1s' }}>
                     <b>Tech Stack Used:</b> React Js + Vite, Tailwind CSS + CSS & MUI
                 </p>
@@ -79,3 +90,4 @@ export default function Footer() {
         </footer>
     );
 }
+// Responsive footer done.

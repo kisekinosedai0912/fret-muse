@@ -5,11 +5,22 @@ import ScalesPage from './components/Scales';
 import Footer from './components/Footer';
 import './assets/css/index.css';
 import { useLocation } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Main() {
     const location = useLocation();
     const initialLoad = useRef(true);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    // Check if the screen is mobile or not
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // accessing the link to home page by default and scroll to other page link paths if selected
     useEffect(() => {
@@ -40,24 +51,38 @@ export default function Main() {
     }, [location]);
 
     return (
-        <main>
-            {/* Home page */}
-            <section className="flex gap-4 p-4 h-screen bg-[#F5F5F5] snap-start" id="home-wrapper">
-                <Home />
-            </section>
-            
-            {/* Fret mastery page */}
-            <section className="flex gap-4 p-4 h-screen snap-start" id="fret-wrapper">
-                <FretPage />
-            </section>
+        <>
+            <main>
+                {
+                    // Home page: mobile or default based on screen state
+                    isMobile ? (
+                        // Mobile view
+                        <section className="flex flex-col gap-[260px] p-4 min-h-screen bg-[#F5F5F5] snap-start" id="home-wrapper">
+                            <Home />
+                        </section>
+                    ) : (
+                        // Default view
+                        <section className="flex gap-4 p-4 h-screen bg-[#F5F5F5] snap-start" id="home-wrapper">
+                            <Home />
+                        </section>
+                    )
+                }
+                
+                {/* Fret mastery page */}
+                <section className="flex gap-4 p-4 h-screen snap-start" id="fret-wrapper">
+                    <FretPage />
+                </section>
 
-            {/* Scales Page */}
-            <section className="flex gap-4 p-4 h-screen bg-[#F5F5F5] snap-start" id="scale-wrapper">
-                <ScalesPage />
-            </section>
+                {/* Scales Page */}
+                <section className={`flex gap-4 p-4 h-screen bg-[#F5F5F5] ${isMobile && 'mt-[44%]'} snap-start`} id="scale-wrapper">
+                    <ScalesPage />
+                </section>
 
-            <Footer />
+                <Footer />
+            </main>
             <Scroller />
-        </main>
+        </>
+
     );
 }
+// Responsive main body done.

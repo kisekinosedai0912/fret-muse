@@ -12,6 +12,16 @@ export default function Nav() {
     const [isVisible, setIsVisible] = useState(false);
     const [activeLink, setActiveLink] = useState('/home');
     const location = useLocation();
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const isActive = (path) => activeLink === path;
 
@@ -107,7 +117,7 @@ export default function Nav() {
                 </div>
 
                 {/* Center section: Nav Links */}
-                <ul className="flex-1 flex items-center justify-center gap-[20px] list-none mb-[10px]">
+                <ul className={`${isMobile && 'hidden'} flex-1 flex items-center justify-center gap-[20px] list-none mb-[10px]`}>
                     <li>
                         <Link 
                             to="/fretmuse/home"
@@ -150,3 +160,4 @@ export default function Nav() {
         </header>
     );
 }
+// Responsive nav done.
