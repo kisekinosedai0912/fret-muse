@@ -32,6 +32,8 @@ import DiminishedPos2 from '../assets/img/d-pos2.png';
 import DiminishedPos3 from '../assets/img/d-pos3.png';
 import DiminishedPos4 from '../assets/img/d-pos4.png';
 import '../assets/css/scale.css';
+import React from 'react';
+import SEO from './SEO';
 
 // Scake props arrays
 const majorScale = [
@@ -172,71 +174,79 @@ export default function ScalesPage() {
     };
 
     return (
-        <section ref={componentRef} id='parent-container' 
-            className={`relative flex flex-col items-center justify-start mt-[100px] min-h-screen w-full snap-start overflow-hidden`}
-        >
-            {/* Dropdown container */}
-            <div id="filter-container" 
-                className={`flex items-center justify-start gap-[100px] w-[92%] h-[60px] opacity-0 
-                    ${isVisible ? 'slide-filter' : ''}`}
+        <>
+            <SEO 
+                title="FretMuse – Master the Guitar Fretboard"
+                description="Unlock the guitar fretboard! Learn notes and scales with interactive tools and speech assistance. Build fluency fast and master solos with confidence."
+                url="https://fret-muse.vercel.app//home"
+                image="https://fret-muse.vercel.app/images/fretmuse-og-image.jpg"
+            />
+            <section ref={componentRef} id='parent-container' 
+                className={`relative flex flex-col items-center justify-start mt-[100px] min-h-screen w-full snap-start overflow-hidden`}
             >
-                <select 
-                    className="py-[6px] w-[160px] font-outfit-small bg-[#736C12]"
-                    value={selectedScale}
-                    onChange={(e) => setSelectedScale(e.target.value)}
+                {/* Dropdown container */}
+                <div id="filter-container" 
+                    className={`flex items-center justify-start gap-[100px] w-[92%] h-[60px] opacity-0 
+                        ${isVisible ? 'slide-filter' : ''}`}
                 >
-                    {
-                        Object.entries(scalesData).map(([key, { name }]) => (
-                            <option key={key} value={key}>{name}</option>
-                        ))
-                    }
-                </select>
-
-                {/* Show only if filter value is major scale */}
-                {
-                    scalesData[selectedScale].showModes && (
-                    <select className="py-[6px] w-[160px] font-outfit-small bg-[#736C12]">
-                        <option value="">Select Modes</option>
-                        <option value="modes">7 Modes</option>
+                    <select 
+                        className="py-[6px] w-[160px] font-outfit-small bg-[#736C12]"
+                        value={selectedScale}
+                        onChange={(e) => setSelectedScale(e.target.value)}
+                    >
+                        {
+                            Object.entries(scalesData).map(([key, { name }]) => (
+                                <option key={key} value={key}>{name}</option>
+                            ))
+                        }
                     </select>
-                    )
-                }
-            </div>
 
-            {/* Render layout based on screen state container */}
-            { !isMobile 
-                ? 
-                    <div className="w-[92%] flex flex-col items-center justify-center gap-[20px] mt-[20px]">
-                        {/* First row */}
-                        <div className="flex gap-[20px]">
-                            {renderScaleImages(firstRow)}
-                        </div>
+                    {/* Show only if filter value is major scale */}
+                    {
+                        scalesData[selectedScale].showModes && (
+                        <select className="py-[6px] w-[160px] font-outfit-small bg-[#736C12]">
+                            <option value="">Select Modes</option>
+                            <option value="modes">7 Modes</option>
+                        </select>
+                        )
+                    }
+                </div>
 
-                        {/* Second row */}
-                        <div className="flex gap-[20px] justify-center">
-                            {renderScaleImages(secondRow)}
-                        </div>
-                    </div>
-                :
-                    <div className="relative w-[92%] h-[calc(100vh-200px)] overflow-hidden">
-                        <div className="absolute inset-0 overflow-y-auto scale-content-container">
-                            <div className="flex flex-col items-center gap-[20px] pb-[120px]">
-                                {/* First row */}
-                                <div className={`flex ${isMobile ? 'flex-col gap-[4px]' : 'gap-[20px]'}`}>
-                                    {renderScaleImages(firstRow)}
-                                </div>
+                {/* Render layout based on screen state container */}
+                { !isMobile 
+                    ? 
+                        <div className="w-[92%] flex flex-col items-center justify-center gap-[20px] mt-[20px]">
+                            {/* First row */}
+                            <div className="flex gap-[20px]">
+                                {renderScaleImages(firstRow)}
+                            </div>
 
-                                {/* Second row */}
-                                <div className={`flex ${isMobile ? 'flex-col gap-[4px]' : 'gap-[20px]'} justify-center`}>
-                                    {renderScaleImages(secondRow)}
-                                </div>
+                            {/* Second row */}
+                            <div className="flex gap-[20px] justify-center">
+                                {renderScaleImages(secondRow)}
                             </div>
                         </div>
-                        {/* Gradient overlay div */}
-                        <div className="absolute bottom-0 left-0 right-0 h-[20px] bg-gradient-to-t from-[rgba(245,245,245,0.2)] to-transparent pointer-events-none"></div>
-                    </div>
-            }
-        </section>
+                    :
+                        <div className="relative w-[92%] h-[calc(100vh-200px)] overflow-hidden">
+                            <div className="absolute inset-0 overflow-y-auto scale-content-container">
+                                <div className="flex flex-col items-center gap-[20px] pb-[120px]">
+                                    {/* First row */}
+                                    <div className={`flex ${isMobile ? 'flex-col gap-[4px]' : 'gap-[20px]'}`}>
+                                        {renderScaleImages(firstRow)}
+                                    </div>
+
+                                    {/* Second row */}
+                                    <div className={`flex ${isMobile ? 'flex-col gap-[4px]' : 'gap-[20px]'} justify-center`}>
+                                        {renderScaleImages(secondRow)}
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Gradient overlay div */}
+                            <div className="absolute bottom-0 left-0 right-0 h-[20px] bg-gradient-to-t from-[rgba(245,245,245,0.2)] to-transparent pointer-events-none"></div>
+                        </div>
+                }
+            </section>
+        </>
     );
 }
 // Responsive scales page done.

@@ -3,6 +3,8 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import Faqs from './Faqs';
 import '../assets/css/fretpage.css';
+import React from 'react';
+import SEO from './SEO';
 
 export default function FretPage() {
     const fretboardNotes = [
@@ -111,72 +113,80 @@ export default function FretPage() {
     }
 
     return (
-        <section id='parent-container' className={`flex flex-col items-center justify-center ${isMobile ? 'gap-[40px]' : 'gap-[10px]' } h-screen w-full snap-start`}>
-            {/* Playlist section */}
-            <section ref={componentRef} className={`flex ${!isMobile ? 'items-center justify-center' : 'items-start justify-center' } ${!isMobile ? 'gap-[20px]' : 'gap-[4px]'} h-[calc(80vh-80px)] w-full`}>
-                <aside className={`w-[45%] mr-[4%] h-[60%] border border-[#A9BF9F] 
-                                bg-[#A9BF9F] flex flex-col items-center justify-center p-2 
-                                opacity-0 ${isVisible ? 'roll-right' : ''}`} 
-                                id="speech-container">
-                                    {/* center text if in mobile view */}
-                    <p className={`${isMobile && 'text-center'} mb-6 font-outfit ${isVisible ? 'fade-text' : ''}`}>
-                        Master all the notes in your fretboard 
-                        {/* adding break if not in mobile view */}
-                        {!isMobile && <br></br>}
+        <>
+            <SEO 
+                title="FretMuse – Master the Guitar Fretboard"
+                description="Unlock the guitar fretboard! Learn notes and scales with interactive tools and speech assistance. Build fluency fast and master solos with confidence."
+                url="https://fret-muse.vercel.app//home"
+                image="https://fret-muse.vercel.app/images/fretmuse-og-image.jpg"
+            />
+            <section id='parent-container' className={`flex flex-col items-center justify-center ${isMobile ? 'gap-[40px]' : 'gap-[10px]' } h-screen w-full snap-start`}>
+                {/* Playlist section */}
+                <section ref={componentRef} className={`flex ${!isMobile ? 'items-center justify-center' : 'items-start justify-center' } ${!isMobile ? 'gap-[20px]' : 'gap-[4px]'} h-[calc(80vh-80px)] w-full`}>
+                    <aside className={`w-[45%] mr-[4%] h-[60%] border border-[#A9BF9F] 
+                                    bg-[#A9BF9F] flex flex-col items-center justify-center p-2 
+                                    opacity-0 ${isVisible ? 'roll-right' : ''}`} 
+                                    id="speech-container">
+                                        {/* center text if in mobile view */}
+                        <p className={`${isMobile && 'text-center'} mb-6 font-outfit ${isVisible ? 'fade-text' : ''}`}>
+                            Master all the notes in your fretboard 
+                            {/* adding break if not in mobile view */}
+                            {!isMobile && <br></br>}
 
-                        {/* adding margin on start when not in mobile view */}
-                        <span className={`${!isMobile && 'ml-[22px]'}`}>
-                            with this speech assistance tool!
-                        </span>
-                    </p>
+                            {/* adding margin on start when not in mobile view */}
+                            <span className={`${!isMobile && 'ml-[22px]'}`}>
+                                with this speech assistance tool!
+                            </span>
+                        </p>
 
-                    {/* Speech input container */}
-                    <div id="speech-input-container" 
-                        className={`w-[80%] h-[80px] border border-[#262626] rounded-lg 
-                        flex items-center justify-center bg-white ${isVisible ? 'fade-text' : ''}`}
-                    >
-                        {/* Play line */}
-                        <div id="line" className="w-[40%] border border-[#736C12] mr-[20px]"></div>
-
-                        {/* Play button */}
-                        <button 
-                            onClick={handleClickEvent}
-                            className="hover:scale-110 transition-transform duration-200 z-10 bg-[#736C12]"
-                            aria-label={isPlaying ? "Pause recording" : "Play recording"}
+                        {/* Speech input container */}
+                        <div id="speech-input-container" 
+                            className={`w-[80%] h-[80px] border border-[#262626] rounded-lg 
+                            flex items-center justify-center bg-white ${isVisible ? 'fade-text' : ''}`}
                         >
-                            {isPlaying 
-                                ? <PauseCircleIcon className="text-[#748E67] w-20 h-20" />
-                                : <PlayCircleIcon className="text-[#748E67] w-20 h-20" />
-                            }
-                        </button>
-                    </div>
-                </aside>
-                <aside className={`w-[35%] h-[60%] border border-[#A9BF9F] border-2 
-                    flex flex-col items-center justify-center opacity-0
-                    ${isVisible ? 'roll-right' : ''}`} 
-                    id="notes-container"
-                >
-                    <div id="stringNum-container">
-                        <p className={`text-[#262626] font-manrope ${isVisible ? 'fade-text' : ''}`}>
-                            {currentNote.string}
-                        </p>
-                    </div>
-                    <div id="note-container">
-                        <p className={`text-[#262626] font-manrope ${isVisible ? 'fade-text' : ''}`}>
-                            {currentNote.note}
-                        </p>
-                    </div>
-                </aside>
-            </section>
+                            {/* Play line */}
+                            <div id="line" className="w-[40%] border border-[#736C12] mr-[20px]"></div>
 
-            {/* Guitar facts section */}
-            <section ref={componentRef} id='facts-container' 
-                className={`flex items-center justify-center w-[86%] h-[calc(30vh-80px)] mt-[20px] 
-                opacity-0 ${isVisible ? 'roll-left' : ''}`}
-            >
-                <Faqs />
+                            {/* Play button */}
+                            <button 
+                                onClick={handleClickEvent}
+                                className="hover:scale-110 transition-transform duration-200 z-10 bg-[#736C12]"
+                                aria-label={isPlaying ? "Pause recording" : "Play recording"}
+                            >
+                                {isPlaying 
+                                    ? <PauseCircleIcon className="text-[#748E67] w-20 h-20" />
+                                    : <PlayCircleIcon className="text-[#748E67] w-20 h-20" />
+                                }
+                            </button>
+                        </div>
+                    </aside>
+                    <aside className={`w-[35%] h-[60%] border border-[#A9BF9F] border-2 
+                        flex flex-col items-center justify-center opacity-0
+                        ${isVisible ? 'roll-right' : ''}`} 
+                        id="notes-container"
+                    >
+                        <div id="stringNum-container">
+                            <p className={`text-[#262626] font-manrope ${isVisible ? 'fade-text' : ''}`}>
+                                {currentNote.string}
+                            </p>
+                        </div>
+                        <div id="note-container">
+                            <p className={`text-[#262626] font-manrope ${isVisible ? 'fade-text' : ''}`}>
+                                {currentNote.note}
+                            </p>
+                        </div>
+                    </aside>
+                </section>
+
+                {/* Guitar facts section */}
+                <section ref={componentRef} id='facts-container' 
+                    className={`flex items-center justify-center w-[86%] h-[calc(30vh-80px)] mt-[20px] 
+                    opacity-0 ${isVisible ? 'roll-left' : ''}`}
+                >
+                    <Faqs />
+                </section>
             </section>
-       </section>
+        </>
     );
 }
 // Responsive fret mastery page done.
